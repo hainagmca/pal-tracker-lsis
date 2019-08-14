@@ -43,4 +43,8 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository{
     public List<TimeEntry> list() {
         return new ArrayList<>(repository.values());
     }
+
+    public void setup() {
+
+    }
 }

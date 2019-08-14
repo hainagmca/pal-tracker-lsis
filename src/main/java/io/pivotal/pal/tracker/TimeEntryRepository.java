@@ -13,4 +13,6 @@ public interface TimeEntryRepository {
     TimeEntry update(Long eq, TimeEntry any);
 
     void delete(Long timeEntryId);
+
+    void setup();
 }

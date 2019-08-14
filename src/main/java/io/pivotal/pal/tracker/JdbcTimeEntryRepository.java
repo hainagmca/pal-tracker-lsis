@@ -83,6 +83,20 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
             rs.getInt("hours")
     );
 
+    public void setup() {
+
+        jdbcTemplate.update("DROP DATABASE IF EXISTS tracker_dev");
+        jdbcTemplate.update("DROP DATABASE IF EXISTS tracker_test");
+        jdbcTemplate.update("CREATE DATABASE tracker_dev");
+        jdbcTemplate.update("CREATE DATABASE tracker_test");
+        jdbcTemplate.update("CREATE USER IF NOT EXISTS 'tracker'@'localhost' IDENTIFIED BY ''");
+        jdbcTemplate.update("GRANT ALL PRIVILEGES ON tracker_dev.* TO 'tracker' @'localhost' ");
+        jdbcTemplate.update("GRANT ALL PRIVILEGES ON tracker_test.* TO 'tracker' @'localhost' ");
+
+
+        jdbcTemplate.update("CREATE TABLE time_entries ( id         BIGINT(20) NOT NULL AUTO_INCREMENT,   project_id BIGINT(20),   user_id    BIGINT(20),   date       DATE,   hours      INT,  PRIMARY KEY (id) )   ENGINE = innodb   DEFAULT CHARSET = utf8");
+
+    }
     private final ResultSetExtractor<TimeEntry> extractor =
             (rs) -> rs.next() ? mapper.mapRow(rs, 1) : null;
 }
