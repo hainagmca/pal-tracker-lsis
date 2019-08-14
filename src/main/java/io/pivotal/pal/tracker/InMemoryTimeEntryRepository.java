@@ -20,12 +20,12 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository{
         return timeEntry1;
     }
 
-    public TimeEntry find(long id) {
+    public TimeEntry find(Long id) {
         return repository.get(id);
     }
 
 
-    public TimeEntry update(long id, TimeEntry timeEntry) {
+    public TimeEntry update(Long id, TimeEntry timeEntry) {
         if(find(id)==null) return null;
         TimeEntry timeEntryUpdated = new TimeEntry(id,
                 timeEntry.getProjectId(),
@@ -36,7 +36,7 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository{
         return  timeEntryUpdated;
     }
 
-    public void delete(long id) {
+    public void delete(Long id) {
         repository.remove(id);
     }
 
